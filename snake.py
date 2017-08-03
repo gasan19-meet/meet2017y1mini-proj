@@ -103,8 +103,8 @@ def move_snake():
     my_pos=snake.pos()
     x_pos=my_pos[0]
     y_pos=my_pos[1]
-    
-   
+
+         
         
     if direction == RIGHT:
         
@@ -120,9 +120,6 @@ def move_snake():
         snake.goto(x_pos,y_pos-SQUARE_SIZE)
         print('you moved down')
 
-    if snake.pos() in pos_list[0,-1]:
-        print('game over ,you ate your body')
-
         
     my_pos=snake.pos()
     pos_list.append(my_pos)
@@ -137,6 +134,9 @@ def move_snake():
         food_stamps.pop(food_ind)
         print('you have eaten the food')
         make_food()
+        stamp2=snake.stamp()
+        stamp_list.append(stamp2)
+        pos_list.append(food_pos)
         
         
     
@@ -163,7 +163,10 @@ def move_snake():
     elif new_y_pos<=DOWN_EDGE:
         print('you hit the bottom edge! Game over!')
         quit()
-        
+    
+    if pos_list[-1] in pos_list[0:-1]:
+        print('game over ,you ate your body')
+        quit()        
     
      
     turtle.ontimer(move_snake,TIME_STEP)
